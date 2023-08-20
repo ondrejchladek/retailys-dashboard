@@ -3,7 +3,7 @@ import LRU from 'lru-cache';
 
 const cache = new LRU({
   max: 100, // The maximum size of the cache
-  maxAge: 1000 * 120  // The maximum age in milliseconds
+  maxAge: 1000 * 60  // The maximum age in milliseconds
 });
 
 export default async function handler(req, res) {
