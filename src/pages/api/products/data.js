@@ -22,11 +22,11 @@ export default async function handler(req, res) {
         'token': process.env.API_TOKEN
       }
     });
-
-    cache.set(url, result.data);
-
     res.status(200).json(result.data);
   } catch (error) {
-    res.status(error.response.status || 500).json({ message: error.message });
+    const status = error.response ? error.response.status : 500;
+    const message = error.message;
+
+    res.status(status).json({ message });
   }
 }
