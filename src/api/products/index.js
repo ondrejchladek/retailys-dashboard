@@ -2,20 +2,11 @@ import { applyPagination } from '../../utils/apply-pagination';
 import { deepCopy } from '../../utils/deep-copy';
 import axios from 'axios';
 
-console.log(process.env.NEXT_PUBLIC_API_TOKEN);
-
 class ProductsApi {
   async getProducts(request = {}) {
     const { filters, page, rowsPerPage } = request;
 
-    let url = `https://api.retailys.com/v1/System/Content/Articles?page=1&per_page=15&expanded=false`;
-
-    const result = await axios.get(url, {
-      headers: {
-        'Accept': 'application/json',
-        'token': process.env.NEXT_PUBLIC_API_TOKEN
-      }
-    });
+    const result = await axios.get('../api/products/data');
 
     let data = [];
 
@@ -91,8 +82,6 @@ class ProductsApi {
     if (typeof page !== 'undefined' && typeof rowsPerPage !== 'undefined') {
       data = applyPagination(data, page, rowsPerPage);
     }
-
-    console.log(data);
 
     return Promise.resolve({
       data,

@@ -31,17 +31,6 @@ import {
 import { Scrollbar } from '../../../components/scrollbar';
 import { SeverityPill } from '../../../components/severity-pill';
 
-const categoryOptions = [
-  {
-    label: 'Kategorie 1',
-    value: '4691'
-  },
-  {
-    label: 'Kategorie 2',
-    value: '4694'
-  }
-];
-
 export const ProductListTable = (props) => {
   const {
     onPageChange,
