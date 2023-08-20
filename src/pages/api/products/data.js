@@ -3,7 +3,7 @@ import LRU from 'lru-cache';
 
 const cache = new LRU({
   max: 100, // The maximum size of the cache
-  maxAge: 1000 * 120  // The maximum age in millisecond
+  maxAge: 1000 * 120  // The maximum age in milliseconds
 });
 
 export default async function handler(req, res) {
@@ -22,11 +22,11 @@ export default async function handler(req, res) {
         'token': process.env.API_TOKEN
       }
     });
+
+    cache.set(url, result.data);
+
     res.status(200).json(result.data);
   } catch (error) {
-    const status = error.response ? error.response.status : 500;
-    const message = error.message;
-
-    res.status(status).json({ message });
+    res.status(error.response.status || 500).json({ message: error.message });
   }
 }
