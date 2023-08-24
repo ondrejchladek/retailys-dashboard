@@ -34,7 +34,6 @@ class ProductsApi {
       }
     });
 
-    data = deepCopy(data);
     let count = data.length;
 
     if (typeof filters !== 'undefined') {
