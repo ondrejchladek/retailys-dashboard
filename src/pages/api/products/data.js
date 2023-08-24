@@ -9,8 +9,6 @@ const cache = new LRU({
 export default async function handler(req, res) {
   let url = `https://api.retailys.com/v1/System/Content/Articles?page=0&per_page=16&expanded=false`;
 
-  const data = cache.get(url);
-
   if (data) {
     return res.status(200).json(data);
   }
@@ -22,8 +20,6 @@ export default async function handler(req, res) {
         'token': process.env.API_TOKEN
       }
     });
-
-    cache.set(url, result.data);
 
     res.status(200).json(result.data);
   } catch (error) {
